@@ -59,7 +59,7 @@ def parse_sink_conf(conf: dict):
 
 
 if __name__ == "__main__":
-    template = read_template("templates/test.json.jinja")
+    template = read_template("templates/sink.json.jinja")
     conf = read_conf("conf.yaml")
     database_conf = conf["projects"]
     debezium_conf = conf["debezium"]
