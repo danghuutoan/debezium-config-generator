@@ -1,0 +1,1 @@
+Debezium config generator
