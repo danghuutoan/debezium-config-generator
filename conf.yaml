@@ -1,0 +1,50 @@
+projects:
+  - project:
+      sink:
+        dbname: test
+        host: localhost
+        port: 5432
+        username: postgres
+        password: password
+        db_type: postgresql
+      source:
+        dbname: test
+        host: localhost
+        port: 5432
+        username: postgres
+        password: password
+        schema: public
+        db_type: postgresql
+        tables:
+            - entity_attribute_group
+            - entity_relation
+  - project:
+      sink:
+        dbname: test
+        host: localhost
+        port: 5432
+        username: postgres
+        password: password
+        schema: public
+        db_type: postgresql
+      source:
+        dbname: test
+        host: localhost
+        port: 5432
+        username: postgres
+        password: password
+        schema: public
+        db_type: postgresql
+        tables:
+            - entity_attribute_group
+            - entity_relation
+
+debezium:
+  url: http://localhost:8083
+
+schema_registry:
+  url: http://schema-registry:8081
+
+kafka:
+  bootstrap_servers:
+    - kafka:9092

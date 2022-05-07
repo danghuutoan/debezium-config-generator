@@ -1,0 +1,28 @@
+{
+    "name": "{{database_name}}-sink",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": "1",
+        "topics": "{% for table in tables %}{{schema}}.{{table}}{% if not loop.last %}, {% endif %}{% endfor %}",
+        "connection.url": "jdbc:{{db_type}}://{{host}}:{{port}}/{{database_name}}?user={{username}}&password={{password}}",
+        "transforms": "unwrap,tsConverter",
+        "transforms.unwrap.type": "com.github.cjmatta.kafka.connect.smt.ExtractNewRecordState",
+        "transforms.unwrap.drop.tombstones": "false",
+        "transforms.unwrap.delete.handling.mode":"rewrite",
+        "transforms.unwrap.add.fields": "source.ts_ms",
+        "transforms.tsConverter.type": "org.apache.kafka.connect.transforms.TimestampConverter$Value",
+        "transforms.tsConverter.field": "__source_ts_ms",
+        "transforms.tsConverter.format": "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+        "transforms.tsConverter.target.type": "Timestamp",
+        "auto.create": "true",
+        "auto.evolve": "true",
+        "insert.mode": "upsert",
+        "delete.enabled": "true",
+        "database.history.kafka.bootstrap.servers": "{% for server in bootstrap_servers %}{{server}}{% if not loop.last %}, {% endif %}{% endfor %}",
+        "database.history.kafka.topic": "schema-changes.{{database_name}}",
+        "key.converter": "io.confluent.connect.avro.AvroConverter",
+        "value.converter": "io.confluent.connect.avro.AvroConverter",
+        "key.converter.schema.registry.url": "{{schema_registry_url}}",
+        "value.converter.schema.registry.url": "{{schema_registry_url}}"
+    }
+}
