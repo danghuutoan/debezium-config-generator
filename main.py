@@ -99,14 +99,14 @@ def generate_source_config(debezium_conf: DebeziumConfig):
         include_tables=debezium_conf.source.include_tables,
         exclude_tables=debezium_conf.source.exclude_tables,
         schema=debezium_conf.source.schema,
-        host=debezium_conf.sink.database.host,
-        port=debezium_conf.sink.database.port,
-        username=debezium_conf.sink.database.user.name,
-        password=debezium_conf.sink.database.user.password,
-        database_name=debezium_conf.sink.database.name,
+        host=debezium_conf.source.database.host,
+        port=debezium_conf.source.database.port,
+        username=debezium_conf.source.database.user.name,
+        password=debezium_conf.source.database.user.password,
+        database_name=debezium_conf.source.database.name,
         bootstrap_servers=debezium_conf.kafka.bootstrap_servers,
         schema_registry_url=debezium_conf.schema_registry.urls,
-        db_type=debezium_conf.sink.database.type,
+        db_type=debezium_conf.source.database.type,
         sink_database_name=debezium_conf.sink.database.name
     )
 
