@@ -11,7 +11,7 @@
         "database.server.name": "{{sink_database_name}}",
         "schema.include.list": "{{schema}}",
         "table.include.list": "{% for table in include_tables %}{{schema}}.{{table}}{% if not loop.last %}, {% endif %}{% endfor %}",
-        "table.exclude.list": "{% for table in exclude_tables %}{{schema}}.{{table}}{% if not loop.last %}, {% endif %}{% endfor %}"
+        "table.exclude.list": "{% for table in exclude_tables %}{{schema}}.{{table}}{% if not loop.last %}, {% endif %}{% endfor %}",
         "database.history.kafka.bootstrap.servers": "{% for server in bootstrap_servers %}{{server}}{% if not loop.last %}, {% endif %}{% endfor %}",
         "key.converter": "io.confluent.connect.avro.AvroConverter",
         "value.converter": "io.confluent.connect.avro.AvroConverter",
