@@ -1,14 +1,14 @@
 projects:
   - project:
       sink:
-        dbname: test
+        dbname: test_sink
         host: localhost
         port: 5432
         username: postgres
         password: password
         db_type: postgresql
       source:
-        dbname: test
+        dbname: test_source
         host: localhost
         port: 5432
         username: postgres
@@ -24,7 +24,7 @@ projects:
 
   - project:
       sink:
-        dbname: test
+        dbname: test_sink
         host: localhost
         port: 5432
         username: postgres
@@ -32,7 +32,7 @@ projects:
         schema: public
         db_type: postgresql
       source:
-        dbname: test
+        dbname: test_source
         host: localhost
         port: 5432
         username: postgres

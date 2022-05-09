@@ -107,6 +107,7 @@ def generate_source_config(debezium_conf: DebeziumConfig):
         bootstrap_servers=debezium_conf.kafka.bootstrap_servers,
         schema_registry_url=debezium_conf.schema_registry.urls,
         db_type=debezium_conf.sink.database.type,
+        sink_database_name=debezium_conf.sink.database.name
     )
 
     with open(
