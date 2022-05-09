@@ -9,8 +9,10 @@ class Source:
         self,
         database: DatabaseIdentity,
         schema: string,
-        tables: List[str],
+        include_tables: List[str],
+        exclude_tables: List[str]
     ) -> None:
         self.database = database
         self.schema = schema
-        self.tables = tables
+        self.include_tables = include_tables
+        self.exclude_tables = exclude_tables

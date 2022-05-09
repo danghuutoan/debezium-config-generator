@@ -16,8 +16,12 @@ projects:
         schema: public
         db_type: postgresql
         tables:
+          include:
             - entity_attribute_group
             - entity_relation
+          exclude:
+            - exluded_table
+
   - project:
       sink:
         dbname: test
@@ -36,8 +40,11 @@ projects:
         schema: public
         db_type: postgresql
         tables:
+          include:
             - entity_attribute_group
             - entity_relation
+          exclude:
+            - exluded_table
 
 debezium:
   url: http://localhost:8083

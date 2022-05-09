@@ -35,7 +35,8 @@ def parse_source_conf(conf: dict):
     port = conf["port"]
     db_type = conf["db_type"]
     schema = conf["schema"]
-    tables = conf["tables"]
+    include_tables = conf["tables"]["include"]
+    exclude_tables = conf["tables"]["exclude"]
 
     source_user = UserIdentity(name=conf["username"], password=conf["password"])
     source_database = DatabaseIdentity(
@@ -48,7 +49,8 @@ def parse_source_conf(conf: dict):
     return Source(
         database=source_database,
         schema=schema,
-        tables=tables,
+        include_tables=include_tables,
+        exclude_tables=exclude_tables
     )
 
 
@@ -83,7 +85,7 @@ if __name__ == "__main__":
         output_dir = args.Output
         os.makedirs(output_dir, exist_ok=True)
 
-    template = read_template("templates/sink.json.jinja")
+    template = read_template("templates/sink.json.jinja2")
     conf = read_conf("conf.yaml")
     database_conf = conf["projects"]
     debezium_conf = conf["debezium"]
@@ -96,7 +98,7 @@ if __name__ == "__main__":
             url=debezium_conf["url"], sink=sink, source=source
         )
         json_config = template.render(
-            tables=source.tables,
+            tables=source.include_tables,
             schema=source.schema,
             host=sink.database.host,
             port=sink.database.port,
