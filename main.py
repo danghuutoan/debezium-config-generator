@@ -134,11 +134,11 @@ if __name__ == "__main__":
 
     
     conf = read_conf("conf.yaml")
-    database_conf = conf["projects"]
+    projects = conf["projects"]
     debezium_url = conf["debezium"]["url"]
     kafka_conf = KafkaConfig(bootstrap_servers=conf["kafka"]["bootstrap_servers"])
     schema_registry_conf = SchemaRegistryConfig(urls=conf["schema_registry"]["url"])
-    for db in database_conf:
+    for db in projects:
         sink = parse_sink_conf(db["project"]["sink"])
         source = parse_source_conf(db["project"]["source"])
         for table in source.include_tables:
