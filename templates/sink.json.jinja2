@@ -3,7 +3,7 @@
     "config": {
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
         "tasks.max": "1",
-        "topics": "{% for table in tables %}{{schema}}.{{table}}{% if not loop.last %}, {% endif %}{% endfor %}",
+        "topics": "{% for topic in topics %}{{topic}}{% if not loop.last %}, {% endif %}{% endfor %}",
         "connection.url": "jdbc:{{db_type}}://{{host}}:{{port}}/{{database_name}}?user={{username}}&password={{password}}",
         "transforms": "unwrap,tsConverter",
         "transforms.unwrap.type": "com.github.cjmatta.kafka.connect.smt.ExtractNewRecordState",
@@ -22,7 +22,7 @@
         "database.history.kafka.topic": "schema-changes.{{database_name}}",
         "key.converter": "io.confluent.connect.avro.AvroConverter",
         "value.converter": "io.confluent.connect.avro.AvroConverter",
-        "key.converter.schema.registry.url": "{{schema_registry_url}}",
-        "value.converter.schema.registry.url": "{{schema_registry_url}}"
+        "key.converter.schema.registry.url": "{% for url in schema_registry_url %}{{url}}{% if not loop.last %}, {% endif %}{% endfor %}",
+        "value.converter.schema.registry.url": "{% for url in schema_registry_url %}{{url}}{% if not loop.last %}, {% endif %}{% endfor %}"
     }
 }

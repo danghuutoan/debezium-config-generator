@@ -47,10 +47,12 @@ projects:
             - exluded_table
 
 debezium:
-  url: http://localhost:8083
+  url: 
+    - http://localhost:8083
 
 schema_registry:
-  url: http://schema-registry:8081
+  url: 
+    - http://schema-registry:8081
 
 kafka:
   bootstrap_servers:
