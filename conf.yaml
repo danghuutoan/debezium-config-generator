@@ -57,3 +57,4 @@ schema_registry:
 kafka:
   bootstrap_servers:
     - kafka:9092
+    - kafka1:9092
