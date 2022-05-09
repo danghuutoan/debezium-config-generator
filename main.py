@@ -135,7 +135,7 @@ if __name__ == "__main__":
     
     conf = read_conf("conf.yaml")
     database_conf = conf["projects"]
-    debezium_conf = conf["debezium"]
+    debezium_url = conf["debezium"]["url"]
     kafka_conf = KafkaConfig(bootstrap_servers=conf["kafka"]["bootstrap_servers"])
     schema_registry_conf = SchemaRegistryConfig(urls=conf["schema_registry"]["url"])
     for db in database_conf:
@@ -145,7 +145,7 @@ if __name__ == "__main__":
             sink.topics.append(f"{source.schema}.{table}")
 
         debezium_config = DebeziumConfig(
-            url=debezium_conf["url"],
+            url=debezium_url,
             sink=sink,
             source=source,
             kafka=kafka_conf,
